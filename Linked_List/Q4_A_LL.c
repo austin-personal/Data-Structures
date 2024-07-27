@@ -84,9 +84,42 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void moveEvenItemsToBack(LinkedList *ll)
-{
-	/* add your code here */
+void moveEvenItemsToBack(LinkedList *ll) {
+    if (!ll->head) return; // Empty list, nothing to do
+
+    ListNode *cur = ll->head;
+    ListNode *pre = NULL;
+    ListNode *last = ll->head;
+
+    while (last->next) {
+        last = last->next;
+    }
+    ListNode *originalLast = last;
+
+    int len = ll->size;
+    int cnt = 0;
+
+    while (cur != NULL && cnt < len) {
+        ListNode *next = cur->next; // Store the next node
+
+        if (cur->item % 2 == 0) { // Odd item
+            if (cur == ll->head) { // If the odd item is at the head
+                ll->head = cur->next; // Move the head
+            } else {
+                pre->next = cur->next; // Skip the current node
+            }
+
+            // Move the current node to the end
+            originalLast->next = cur;
+            cur->next = NULL;
+            originalLast = cur; // Update the last pointer
+        } else {
+            pre = cur; // Update the pre pointer if the item is even
+        }
+
+        cur = next; // Move to the next node
+        cnt++;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
