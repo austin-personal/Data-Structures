@@ -86,7 +86,48 @@ int main()
 
 void moveOddItemsToBack(LinkedList *ll)
 {
-	/* add your code here */
+	ListNode* cur = ll->head;
+	int len = ll->size;
+	ListNode* pre;
+	int ind = len-1;
+	int cnt = 0;
+	printf("%s", "1 CHECK\n");
+	while (cnt <=len)
+	{ 	
+		ListNode* temp = cur->next;
+		ListNode* tempCur = cur;
+		
+		if (cur->item%2 ==0){
+			pre = cur;
+			cur = cur->next;
+			cnt++;
+			printf("%s", "2 CHECK\n");
+			continue;
+		
+		}else{ // If the node has odd item
+			// if the node's index is 0
+			
+			if (cnt == 0){
+				printf("%s", "4 CHECK\n");
+				ListNode* lastNode = findNode(ll, ind);
+				lastNode->next = cur;
+				cur->next = NULL;
+			}else{
+				printf("%s", "5 CHECK\n");
+				// Extract and Link - change pre.next to cur.next
+				pre->next = cur->next;
+				// put at the back
+				ListNode* lastNode = findNode(ll, ind);
+				lastNode->next = cur;
+				cur->next = NULL;
+				}
+			}
+			
+		cur = temp;
+		pre = tempCur;
+		cnt++;
+	}
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

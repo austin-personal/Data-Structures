@@ -21,7 +21,7 @@ typedef struct _linkedlist{
 	ListNode *head;
 } LinkedList;			// You should not change the definition of LinkedList
 
-
+// It is crucial to declare functions in initial. This is because C is procedure programming language. If a function is not declare but should be used, it makes error
 ///////////////////////// function prototypes ////////////////////////////////////
 
 //You should not change the prototype of this function
@@ -90,7 +90,27 @@ int main()
 
 int insertSortedLL(LinkedList *ll, int item)
 {
-	/* add your code here */
+	ListNode* cur;
+	int ind;
+	ind = 0;
+	cur = ll->head;
+	// 1. Find the right position
+	// 2. Insert the new item
+	// If it is the first value, insert anyway
+	if (ll->size == 0){
+		insertNode(ll, 0, item);
+	}else{
+		// if Not first, insert after finding right position -> 
+		while ( cur != NULL && item >= cur->item)
+		{	// if Not first, insert next to the node with same value
+			if (cur -> item == item){
+				return -1;
+			}
+			ind++;
+			cur = cur->next;
+		}
+		insertNode(ll, ind, item);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -170,7 +190,7 @@ int insertNode(LinkedList *ll, int index, int value){
 
 	// Find the nodes before and at the target position
 	// Create a new node and reconnect the links
-	if ((pre = findNode(ll, index - 1)) != NULL){
+	if ((pre = findNode(ll, index - 1)) != NULL){ // 여기 조건문을 통해서 pre가 선언됨
 		cur = pre->next;
 		pre->next = malloc(sizeof(ListNode));
 		pre->next->item = value;
