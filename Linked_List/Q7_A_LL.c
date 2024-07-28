@@ -85,10 +85,44 @@ int main()
 
 ////////////////////////////////////////////////////////////////////////
 
-void RecursiveReverse(ListNode **ptrHead)
-{
-	/* add your code here */
+// void RecursiveReverse(ListNode **ptrHead)
+// {
+// 	ListNode* cur = *ptrHead;
+// 	ListNode* head = *ptrHead;
+// 	ListNode* nextNode;
+	
+	
+// 	if (cur->next != NULL){
+// 		*ptrHead = cur;
+// 		nextNode = cur->next;
+// 		RecursiveReverse(&nextNode);
+// 	}else{
+// 		cur->next = 
+
+// 	}
+
+// }
+void RecursiveReverse(ListNode **ptrHead) {
+    ListNode* cur = *ptrHead;
+
+    // 기본 종료 조건: 리스트가 비어 있거나 마지막 노드에 도달한 경우
+    if (cur == NULL || cur->next == NULL) {
+        return;
+    }
+
+    ListNode* nextNode = cur->next;
+
+    // 재귀 호출
+    RecursiveReverse(&nextNode);
+
+    // 현재 노드의 다음 노드가 현재 노드를 가리키도록 설정
+    cur->next->next = cur;
+    cur->next = NULL;
+
+    // 역순의 새로운 헤드를 설정
+    *ptrHead = nextNode;
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////
 

@@ -102,8 +102,24 @@ int main()
 
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
-	/* add your code here */
+    int len = ll->size;
+    int half = (len + 1) / 2; // Correct calculation for half index
+
+    // Find the node before the split
+    ListNode *splitter = findNode(ll, half - 1);
+
+    // Fill the back list
+    resultBackList->head = splitter->next;
+    resultBackList->size = len - half;
+
+    // Terminate the front list
+    splitter->next = NULL;
+
+    // Fill the front list
+    resultFrontList->head = ll->head;
+    resultFrontList->size = half;
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 
