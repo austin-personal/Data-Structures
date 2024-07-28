@@ -94,8 +94,11 @@ int main()
 			removeOddValues(&q); // You need to code this function
 			printf("The resulting queue after removing odd integers is: ");
 			printList(&(q.ll));
+
 			removeAllItemsFromQueue(&q);
+
 			removeAllItems(&ll);
+
 			break;
 		case 0:
 			removeAllItemsFromQueue(&q);
@@ -116,13 +119,49 @@ int main()
 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+	ListNode *cur = ll->head;
+	while (cur != NULL)
+	{
+		enqueue(q, cur->item);
+		cur = cur->next;
+	}
+	
 }
 
 void removeOddValues(Queue *q)
 {
-	/* add your code here */
+    LinkedList* curQ = &(q->ll);
+    ListNode* curN = curQ->head;
+    ListNode* preN = NULL;
+
+    while (curN != NULL)
+    {
+        if (curN->item % 2 != 0)
+        {
+            if (curN == curQ->head)
+            {
+                // Removing the head node
+                curQ->head = curN->next;
+                free(curN);
+                curN = curQ->head;
+            }
+            else
+            {
+                // Removing a middle or tail node
+                preN->next = curN->next;
+                free(curN);
+                curN = preN->next;
+            }
+            curQ->size--; // Adjust the size of the linked list
+        }
+        else
+        {
+            preN = curN;
+            curN = curN->next;
+        }
+    }
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////
 
