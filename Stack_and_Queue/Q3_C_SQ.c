@@ -103,7 +103,23 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-  /* add your code here */
+	LinkedList* curSt = &s->ll;
+	ListNode* curN = curSt->head;
+	int len = curSt->size;
+	//if size odd return 0
+	if (curSt->size %2 !=0){
+		return 0;
+	}else{ //else check every pair, any not-satisfied return 0 
+		while (curN != NULL && curN->next != NULL) // 예외 처리 확실히
+		{
+			if (curN->item != curN->next->item + 1 && curN->item != curN->next->item - 1){
+				return 0;
+			}
+			curN = curN->next->next;
+		}
+		return 1;
+	}
+	//all check passed then can return 1
 }
 
 //////////////////////////////////////////////////////////////////////////////////

@@ -104,7 +104,38 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	Stack S;
+	LinkedList* cur = &S.ll;
+	S.ll.head = NULL;
+	S.ll.size = 0;
+	char checkBefore;
+	int i = 0;
+
+	while (expression[i] != '/0'){
+
+		if (expression[i] == ')'){
+			checkBefore =  pop(&S);
+			if (checkBefore != '('){
+				return 1;
+			}
+		}
+		if (expression[i] == ']'){
+			checkBefore =  pop(&S);
+			if (checkBefore != '['){
+				return 1;
+			}
+		}
+		if (expression[i] == '}'){
+			checkBefore =  pop(&S);
+			if (checkBefore != '{'){
+				return 1;
+			}
+		}
+		push(&S,expression[i]);
+		i++;
+
+	}
+	return 0;
 }
 
 ////////////////////////////////////////////////////////////

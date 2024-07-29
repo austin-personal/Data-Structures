@@ -109,10 +109,29 @@ int main()
 
 ////////////////////////////////////////////////////////////
 
+// void removeUntil(Stack *s, int value)
+// {	
+// 	ListNode* curN = s->ll.head;
+// 	while (curN->item != value && curN !=NULL)
+// 	{
+// 		pop(s);
+// 		curN = curN->next;
+// 	}
+	
+// }
+//나의 첫번째 시도에서 잘못 된점
+//1. pop을 하는데 계속해서 CurN을 옆으로 넘기는 시도가 잘못되었다. 
+//두번째 시도의 의도
+//1. head값을 지속적으로 pop하는 형식. 현재 head가 value와 같으면 스탑.
+
 void removeUntil(Stack *s, int value)
 {
-/* add your code here */
+    // Continue removing items until the stack is empty or we find the specified value
+    while (!isEmptyStack(s) && peek(s) != value) {
+        pop(s);
+    }
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////
 

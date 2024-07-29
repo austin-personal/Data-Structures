@@ -112,8 +112,35 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	Stack st; 
+	st.ll.head = NULL; 
+	st.ll.size = 0;
+	st.ll.tail = NULL;
+	//스택의 st.ll 값을 초기화해야 연결 리스트가 유효한 상태로 시작하고, 이를 사용했을 때 정의되지 않은 동작을 방지할 수 있다.
+	//이 초기화 없이 head, tail 및 size 멤버는 쓰레기 값을 포함할 수 있다.
+
+	int len = q->ll.size;
+	int ind = 0;
+	int value; 
+
+	
+	while (ind < len)
+	{
+		value = dequeue(q); 
+		push(&st, value); 
+		ind++;
+	}
+
+	
+	ind = 0;
+	while (ind < len)
+	{
+		value = pop(&st);
+		enqueue(q, value);
+		ind++;
+	}
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
