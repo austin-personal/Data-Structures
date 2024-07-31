@@ -105,7 +105,32 @@ int main()
 
 void mirrorTree(BTNode *node)
 {
-	/* add your code here */
+    if (node == NULL){
+        return;
+    }
+    
+    // if (node->left != NULL && node->right != NULL){
+        
+    // }else if (node->left != NULL || node->right != NULL)
+    // {
+    //     if (node->left !=NULL){
+    //         node->right = node->left;
+    //         free(node->left);
+    //     }else{
+    //         node->left = node->right;
+    //         free(node->right);
+    //     }
+    // }
+    // Feedback 1: NULL can be swaped with a node which is not null
+    // Feedback 2: Recursion should be proceed earlier than Swapping. 
+    // Because it will not affect the child's recursion by swapping from leaf to top.
+    
+    
+    mirrorTree(node->right);
+    mirrorTree(node->left);
+    BTNode *temp = node->left;
+    node->left = node->right;
+	node->right = temp; 
 }
 
 //////////////////////////////////////////////////////////////////////////////////

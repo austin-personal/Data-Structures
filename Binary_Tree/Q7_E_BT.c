@@ -100,10 +100,41 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
+#include <limits.h> // Include this to use INT_MAX
+
 int smallestValue(BTNode *node)
 {
-	/* add your code here */
+    if (node == NULL) {
+        return INT_MAX; // Use a large value for null nodes
+    }
+
+    // Base case: If the node is a leaf node, return its item
+    if (node->left == NULL && node->right == NULL) {
+        return node->item;
+    }
+    int a;
+    int b;
+
+    // Recursively find the smallest value in the left and right subtrees
+    if (node->left != NULL) {
+        a = smallestValue(node->left);
+    }
+    if (node->right != NULL) {
+        b = smallestValue(node->right);
+    }
+
+    // Return the minimum of the current node's value, a, and b
+    int min = node->item;
+    if (a < min) {
+        min = a;
+    }
+    if (b < min) {
+        min = b;
+    }
+
+    return min;
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////
 
