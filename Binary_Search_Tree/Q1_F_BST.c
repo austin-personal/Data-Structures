@@ -93,9 +93,30 @@ int main()
 
 void levelOrderTraversal(BSTNode* root)
 {
+	Queue newQ;
+	BSTNode* cur = root;
+	newQ.head= NULL;
+	newQ.tail= NULL;
+	BSTNode *temp;
+	
+	enqueue(&newQ.head,&newQ.tail, root);
 
-    /* add your code here */
+	while (!isEmpty(newQ.head))
+	{
+		temp = dequeue(&newQ.head,&newQ.tail);
+		printf("%d ", temp->item);
+		if (temp->left !=NULL){
+			enqueue(&newQ.head,&newQ.tail, temp->left);
+		}
+		if (temp->right !=NULL){
+			enqueue(&newQ.head,&newQ.tail, temp->right);
+		}
+
+	}
 }
+//Feedback: 
+//1. Null일때 enqueue 못하게 바꿈(left right)
+//2. While loop untill queue is not empty
 
 ///////////////////////////////////////////////////////////////////////////////
 
